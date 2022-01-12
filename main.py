@@ -30,7 +30,7 @@ yo = piece(True, 12, 1, 1, 2, 1, 2, 6, 0)
 wgr = piece(False, 13, 3, 3, 1, 1, 1, 5, 3)
 wrb = piece(False, 14, 3, 3, 3, 1, 1, 4, 5)
 wbo = piece(False, 15, 1, 3, 3, 1, 1, 6, 4)
-wog = piece(False, 15, 1, 3, 1, 1, 1, 6, 3)
+wog = piece(False, 15, 1, 3, 1, 1, 1, 3, 6)
 ygr = piece(False, 17, 3, 1, 1, 1, 2, 3, 5)
 yrb = piece(False, 18, 3, 1, 3, 1, 2, 5, 4)
 ybo = piece(False, 19, 1, 1, 3, 1, 2, 4, 6)
@@ -109,8 +109,34 @@ def findpiece(x, y, z):
       if loc(bo) == (x, y, z):
         return(bo)
       if loc(og) == (x, y, z):
-        return(bo)
+        return(og)
 
+def status():
+  print("White")
+  print(findpiece(1, 3, 3).key, findpiece(2, 3, 3).key,        findpiece(3, 3, 3).key)
+  print(findpiece(1, 3, 2).key, 1, findpiece(3, 3, 2).key)
+  print(findpiece(1, 3, 1).key, findpiece(2, 3, 1).key, findpiece(3, 3, 1).key)
+  print("Yellow")
+  print(findpiece(1, 1, 1).key, findpiece(2, 1, 1).key, findpiece(3, 1, 1).key)
+  print(findpiece(1, 1, 2).key, 2, findpiece(3, 1, 2).key)
+  print(findpiece(1, 1, 3).key, findpiece(2, 1, 3).key, findpiece(3, 1, 3).key)
+  print("Green")
+  print(findpiece(1, 3, 1).partner1, findpiece(2, 3, 1).partner1, findpiece(3, 3, 1).partner2)
+  print(findpiece(1, 2, 1).key, 3, findpiece(3, 2, 1).key)
+  print(findpiece(1, 1, 1).partner2, findpiece(2, 1, 1).partner1, findpiece(3, 1, 1).partner1)
+  print("Red")
+  print(findpiece(3, 3, 1).partner1, findpiece(3, 3, 2).partner1, findpiece(3, 3, 3).partner2)
+  print(findpiece(3, 2, 1).partner1, 5, findpiece(3, 2, 3).partner1)
+  print(findpiece(3, 1, 1).partner2, findpiece(3, 1, 2).partner1, findpiece(3, 1, 3).partner1)
+  print("Blue")
+  print(findpiece(3, 3, 3).partner1, findpiece(2, 3, 3).partner1, findpiece(1, 3, 3).partner2)
+  print(findpiece(3, 2, 3).key, 4, findpiece(1, 2, 3).key)
+  print(findpiece(3, 1, 3).partner2, findpiece(2, 1, 3).partner1, findpiece(1, 1, 3).partner1)
+  print("Orange")
+  print(findpiece(1, 3, 3).partner1, findpiece(1, 3, 2).partner1, findpiece(1, 3, 1).partner2)
+  print(findpiece(1, 2, 3).partner1, 6, findpiece(1, 2, 1).partner1)
+  print(findpiece(1, 1, 3).partner2, findpiece(1, 1, 2).partner1, findpiece(1, 1, 1).partner1)
+                                  
 def R():
 #moving corners
   findpiece(3, 1, 1).y += 2
@@ -232,3 +258,4 @@ def B():
   orientate(findpiece(3, 2, 3), 1)
 
 print("the code kinda worked i guess")
+status()
