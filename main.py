@@ -239,3 +239,5 @@ def B():
   findpiece(3, 2, 3).y += 1
   findpiece(3, 2, 3).orientation += 1
   reg(findpiece(3, 2, 3))
+
+print("the code kinda worked i guess")
