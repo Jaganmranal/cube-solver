@@ -50,13 +50,13 @@ class piece:
 
 #finds piece based on location
 def findpiece(x, y, z):
-  for i in [wg, wr, wb, wo, gr, rb, bo, og, yg, yr, yb, yo, wgr, wrb, wbo, wog, ygr, yrb, ybo, yog, w, g, r, b, o, yellow]:
+  for i in [wg, wr, wb, wo, gr, rb, bo, og, yg, yr, yb, yo, wgr, wrb, wbo, ygr, yrb, ybo, yog, w, g, r, b, o, yellow]:
     if i.loc() == (x, y, z):
       return(i)  
 
 #finds piece based on identity
 def scan(target):
-  for i in [wg, wr, wb, wo, gr, rb, bo, og, yg, yr, yb, yo, wgr, wrb, wbo, wog, ygr, yrb, ybo, yog, w, g, r, b, o, yellow]:
+  for i in [wg, wr, wb, wo, gr, rb, bo, og, yg, yr, yb, yo, wgr, wrb, wbo, ygr, yrb, ybo, yog, w, g, r, b, o, yellow]:
     if i.identity == target:
       return(i)
 
@@ -80,7 +80,7 @@ ygr = piece(False, 17, 3, 1, 1, 1, 2, 3, 5)
 yrb = piece(False, 18, 3, 1, 3, 1, 2, 5, 4)
 ybo = piece(False, 19, 1, 1, 3, 1, 2, 4, 6)
 yog = piece(False, 20, 1, 1, 1, 1, 2, 6, 3)
-w = piece(None, 21, 2, 3, 2, 1, 1, 0, 0)
+w = piece(None, 21, 20, 3, 2, 1, 1, 0, 0)
 g = piece(None, 22, 2, 2, 1, 1, 3, 0, 0)
 r = piece(None, 23, 3, 2, 2, 1, 5, 0, 0)
 b = piece(None, 24, 2, 2, 3, 1, 4, 0, 0)
@@ -96,7 +96,7 @@ yellow = piece(None, 26, 2, 1, 2, 1, 2, 0, 0)
 def status():
   print("White")
   print(findpiece(1, 3, 3).key, findpiece(2, 3, 3).key, findpiece(3, 3, 3).key)
-  print(findpiece(1, 3, 2).key, findpiece(2, 3, 2).key, findpiece(3, 3, 2).key)
+  print(findpiece(1, 3, 2).key, findpiece(3, 3, 2).key, findpiece(3, 3, 2).key)
   print(findpiece(1, 3, 1).key, findpiece(2, 3, 1).key, findpiece(3, 3, 1).key)
   print("Green")
   print(findpiece(1, 3, 1).partner1, findpiece(2, 3, 1).partner1, findpiece(3, 3, 1).partner2)
@@ -119,32 +119,11 @@ def status():
   print(findpiece(1, 1, 2).key, findpiece(1, 1, 2).key, findpiece(3, 1, 2).key)
   print(findpiece(1, 1, 3).key, findpiece(2, 1, 3).key, findpiece(3, 1, 3).key)
 
-def U():
-#moving edges
-  edge5 = findpiece(2, 3, 1).identity
-  edge6 = findpiece(1, 3, 2).identity
-  edge7 = findpiece(2, 3, 3).identity
-  edge8 = findpiece(3, 3, 2).identity
-  scan(edge5).x -= 1
-  scan(edge5).z += 1
-  scan(edge6).x += 1
-  scan(edge6).z += 1
-  scan(edge7).x += 1
-  scan(edge7).z -= 1
-  scan(edge8).x -= 1
-  scan(edge8).z -= 1
-  #moving corners
-  corner5 = findpiece(3, 3, 1).identity
-  corner6 = findpiece(1, 3, 1).identity
-  corner7 = findpiece(1, 3, 3).identity
-  corner8 = findpiece(3, 3, 3).identity
-  scan(corner5).x -= 2
-  scan(corner6).z += 2
-  scan(corner7).x += 2
-  scan(corner8).z -= 2
 
-def D():
- #moving edges
+
+#rotates cube
+def rotate():
+  #moving bottom edges
   edge1 = findpiece(2, 1, 1).identity
   edge2 = findpiece(1, 1, 2).identity
   edge3 = findpiece(2, 1, 3).identity
@@ -157,7 +136,7 @@ def D():
   scan(edge3).z -= 1
   scan(edge4).x -= 1
   scan(edge4).z -= 1
-  #moving corners
+  #moving bottom corners
   corner1 = findpiece(3, 1, 1).identity
   corner2 = findpiece(1, 1, 1).identity
   corner3 = findpiece(1, 1, 3).identity
@@ -166,14 +145,34 @@ def D():
   scan(corner2).z += 2
   scan(corner3).x += 2
   scan(corner4).z -= 2
-
-def E():
+  #moving top edges
+  edge5 = findpiece(2, 3, 1).identity
+  edge6 = findpiece(1, 3, 2).identity
+  edge7 = findpiece(2, 3, 3).identity
+  edge8 = findpiece(3, 3, 2).identity
+  scan(edge5).x -= 1
+  scan(edge5).z += 1
+  scan(edge6).x += 1
+  scan(edge6).z += 1
+  scan(edge7).x += 1
+  scan(edge7).z -= 1
+  scan(edge8).x -= 1
+  scan(edge8).z -= 1
+  #moving top corners
+  corner5 = findpiece(3, 3, 1).identity
+  corner6 = findpiece(1, 3, 1).identity
+  corner7 = findpiece(1, 3, 3).identity
+  corner8 = findpiece(3, 3, 3).identity
+  scan(corner5).x -= 2
+  scan(corner6).z += 2
+  scan(corner7).x += 2
+  scan(corner8).z -= 2
   #moving centers
   g.x, g.y, g.z = (1, 2, 2)
   o.x, o.y, o.z = (2, 2, 3)
   b.x, b.y, b.z = (3, 2, 2)
   r.x, r.y, r.z = (2, 2, 1)
-  #moving edges
+  #moving edges in e-layer
   edge9 = findpiece(1, 2, 1).identity
   findpiece(1, 2, 1).flip()
   edge10 = findpiece(1, 2, 3).identity
@@ -187,55 +186,123 @@ def E():
   scan(edge11).z -= 2
   scan(edge12).x -= 2
 
-#rotates cube
-def rotate():
-  U()
-  D()
-  E()
-
 def R():
-  #moving corners
+#moving corners
   holder1 = findpiece(3, 1, 1).identity
-  holder2 = findpiece(3, 3, 1).identity
-  holder3 = findpiece(3, 3, 3).identity
-  holder4 = findpiece(3, 1, 3).identity
   scan(holder1).orientate(2)
+  scan(holder1).y += 1
+  holder2 = findpiece(3, 3, 1).identity
   scan(holder2).orientate(1)
+  scan(holder2).z -= 2
+  holder3 = findpiece(3, 3, 3).identity
   scan(holder3).orientate(2)
+  scan(holder3).y -= 2
+  holder4 = findpiece(3, 1, 3).identity
   scan(holder4).orientate(1)
 #moving edges
   holder5 = findpiece(3, 2, 1).identity
-  holder6 = findpiece(3, 3, 2).identity
-  holder7 = findpiece(3, 2, 3).identity
-  holder8 = findpiece(3, 1, 2).identity
   scan(holder5).y += 1
   scan(holder5).z += 1
+  holder6 = findpiece(3, 3, 2).identity
   scan(holder6).y -= 1
   scan(holder6).z += 1
+  holder7 = findpiece(3, 2, 3).identity
   scan(holder7).y -= 1
   scan(holder7).z -= 1
+  holder8 = findpiece(3, 1, 2).identity
   scan(holder8).y += 1
   scan(holder8).z -= 1
-
 '''
+def L():
 #moving corners
-holder1 = findpiece(3, 1, 1).identity
+  findpiece(1, 1, 1).y += 2
+  orientate(findpiece(1, 1, 1), 1)
+  findpiece(1, 3, 1).z += 2
+  orientate(findpiece(1, 3, 1), 2)
+  findpiece(1, 3, 3).y -= 2
+  orientate(findpiece(1, 3, 3), 1)
+  findpiece(1, 1, 3).y -= 2
+  orientate(findpiece(1, 1, 3), 2)
+#moving edges
+  findpiece(1, 2, 1).z += 1
+  findpiece(1, 2, 1).y += 1
+  findpiece(1, 3, 2).z += 1
+  findpiece(1, 3, 2).y -= 1
+  findpiece(1, 2, 3).z -= 1
+  findpiece(1, 2, 3).y -= 1
+  findpiece(1, 1, 2).z -= 1
+  findpiece(1, 1, 2).y += 1
+
+
+
+def F():
+#moving corners
+  findpiece(1, 3, 1).x += 2
+  orientate(findpiece(1, 3, 1), 1)
+  findpiece(3, 3, 1).y -= 2
+  orientate(findpiece(3, 3, 1), 2)
+  findpiece(3, 1, 1).x -= 2
+  orientate(findpiece(3, 1, 1), 1)
+  findpiece(1, 1, 1).y += 2
+  orientate(findpiece(1, 1, 1), 2)
+#moving edges
+  findpiece(2, 3, 1).x += 1
+  findpiece(2, 3, 1).y -= 1
+  orientate(findpiece(2, 3, 1), 1)
+  findpiece(3, 2, 1).x -= 1
+  findpiece(3, 2, 1).y -= 1
+  orientate(findpiece(3, 2, 1), 1)
+  findpiece(2, 1, 1).x -= 1
+  findpiece(2, 1, 1).y += 1
+  orientate(findpiece(2, 1, 1), 1)
+  findpiece(1, 2, 1).x += 1
+  findpiece(1, 2, 1).y += 1
+  orientate(findpiece(1, 2, 1), 1)
+
+def B():
+#moving corners
+  findpiece(1, 3, 3).x += 2
+  orientate(findpiece(1, 3, 3), 1)
+  findpiece(3, 3, 3).y -= 2
+  orientate(findpiece(3, 3, 3), 2)
+  findpiece(3, 1, 3).x -= 2
+  orientate(findpiece(3, 1, 3), 1)
+  findpiece(1, 1, 3).y += 2
+  orientate(findpiece(1, 1, 3), 2)
+#moving edges
+  findpiece(2, 3, 3).x -= 1
+  findpiece(2, 3, 3).y -= 1
+  orientate(findpiece(2, 3, 3), 1)
+  findpiece(1, 2, 3).x += 1
+  findpiece(1, 2, 3).y -= 1
+  orientate(findpiece(1, 2, 3), 1)
+  findpiece(2, 1, 3).x += 1
+  findpiece(2, 1, 3).y += 1
+  orientate(findpiece(2, 1, 3), 1)
+  findpiece(3, 2, 3).x -= 1
+  findpiece(3, 2, 3).y += 1
+  orientate(findpiece(3, 2, 3), 1)'''
+
+'''holder1 = findpiece(3, 1, 1).identity
 holder2 = findpiece(3, 3, 1).identity
 holder3 = findpiece(3, 3, 3).identity
 holder4 = findpiece(3, 1, 3).identity
-scan(holder1).orientate(2)
-scan(holder1).y += 2
-scan(holder2).orientate(1)
+
+scan(holder2).orientate(2)
 scan(holder2).z -= 2
-scan(holder3).orientate(2)
+
+scan(holder4).orientate(2)
+scan(holder4).z += 2
+
+scan(holder1).orientate(1)
+scan(holder1).y += 2
+
+scan(holder3).orientate(1)
 scan(holder3).y -= 2
-scan(holder4).orientate(1)
-scan(holder4).z -= 2
-'''
 
+status()'''
 
-R()
-status()
+print(findpiece(2, 1, 2).identity)
 
 print("the code kinda worked i guess")
 
